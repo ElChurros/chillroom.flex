@@ -87,7 +87,7 @@ const Room = ({ match }) => {
         imageRef.current.src = "https://upload.wikimedia.org/wikipedia/commons/c/ce/Font_Awesome_5_solid_arrow-circle-right.svg"
 
         //Connect to socket.io server
-        socketRef.current = io.connect("/");
+        socketRef.current = io.connect(process.env.REACT_APP_SERVER);
 
         //Get access to microphone
         navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
@@ -240,6 +240,10 @@ const Room = ({ match }) => {
             <Canvas className={styles.canvas} height="200" width="300" draw={drawPlayers}>
                 Your browser does not support the HTML5 canvas tag.
             </Canvas>
+            {audioCtx.state !== 'running'
+                ? <button onClick={() => {audioCtx.resume()}}>Activate audio</button>
+                : null
+            }
         </>
     );
 };
