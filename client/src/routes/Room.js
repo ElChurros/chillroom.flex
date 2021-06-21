@@ -92,6 +92,7 @@ const Room = ({ match }) => {
         //Get access to microphone
         navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
             //Tell the server we want to join the room
+            console.log("emitting join room event");
             socketRef.current.emit("join room", roomID);
             //When server answers, init state and peer connections for every person in the room
             socketRef.current.on("all users", users => {
@@ -131,6 +132,7 @@ const Room = ({ match }) => {
             })
 
             socketRef.current.on("user joined", payload => {
+                console.log("user joined : ", payload)
                 const peer = addPeer(payload.signal, payload.callerID, stream);
                 peersRef.current.push({
                     peerID: payload.callerID,
