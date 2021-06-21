@@ -95,6 +95,7 @@ const Room = ({ match }) => {
             socketRef.current.emit("join room", roomID);
             //When server answers, init state and peer connections for every person in the room
             socketRef.current.on("all users", users => {
+                console.log("all users : ", users)
                 const players = []
                 users.forEach(user => {
                     const { id, pos } = user
@@ -146,6 +147,7 @@ const Room = ({ match }) => {
     //Players movements handling
     useEffect(() => {
         socketRef.current.on("player moved", payload => {
+            console.log("player moved : ", payload)
             const p = [...players]
             p.find(pl => pl.id === payload.id).pos = payload.pos
             setPlayers(p)
@@ -218,6 +220,7 @@ const Room = ({ match }) => {
     useEventListener("keydown", handler)
 
     function drawPlayers(context) {
+        console.log("drawing players : ", players)
         if (!imageLoaded)
             return
         players.forEach(player => {
