@@ -220,7 +220,6 @@ const Room = ({ match }) => {
     useEventListener("keydown", handler)
 
     function drawPlayers(context) {
-        console.log("drawing players : ", players)
         if (!imageLoaded)
             return
         players.forEach(player => {
