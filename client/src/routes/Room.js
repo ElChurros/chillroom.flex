@@ -84,7 +84,7 @@ const Room = ({ match }) => {
         imageRef.current = new Image()
         imageRef.current.onload = () => setImageLoaded(true)
         
-        imageRef.current.src = "https://upload.wikimedia.org/wikipedia/commons/c/ce/Font_Awesome_5_solid_arrow-circle-right.svg"
+        imageRef.current.src = `${process.env.PUBLIC_URL}/arrow.svg`
 
         //Connect to socket.io server
         socketRef.current = io.connect(process.env.REACT_APP_SERVER);
